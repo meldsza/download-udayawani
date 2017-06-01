@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 let app = express();
+const request = require('request')
 let PDFMerge = require('easy-pdf-merge');
 
 app.use(bodyParser.json())
@@ -15,19 +16,17 @@ function pad(n) {
 var http = require('http');
 var fs = require('fs');
 
-var download = function(url, dest, cb) {
+var download = function(url, dest) {
+  return new Promise(function (resolve, reject) {
   var file = fs.createWriteStream(dest);
-  var request = http.get(url, function(response) {
-    response.pipe(file);
-    file.on('finish', function() {
-      file.close(cb);
+  request(url).pipe(file);
+  file.on('finish', () => {
+    resolve()
+    });
+  file.on('error', (r) => {
+    reject(r)
     });
   });
-}
-let dp = function(url, dest){
-    return new Promise(function(resolve, reject) {
-        download(url,dest,resolve);
-    });
 }
 app.get('/', async function (req, res) {
 
