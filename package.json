@@ -19,6 +19,6 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "pdf-merge": "^0.1.0"
+    "easy-pdf-merge": "^0.1.3"
   }
 }
