@@ -33,7 +33,7 @@ app.get('/', async function (req, res) {
 
     let today = new Date();
     let pdfFiles = [];
-    let base = 'https://erelego.com/eNewspaper/News/UVANI/MAN/' + today.getFullYear() + '/' + pad(today.getMonth()+1) + '/' + pad(today.getDate()) + '/';
+    let base = 'http://erelego.com/eNewspaper/News/UVANI/MAN/' + today.getFullYear() + '/' + pad(today.getMonth()+1) + '/' + pad(today.getDate()) + '/';
     let filepre =   today.getFullYear() + pad(today.getMonth()+1) + pad(today.getDate()) + '_';
     for (let i = 1; i <= 16; i++) {
         pdfFiles.push(filepre + i + ".PDF");
