@@ -19,7 +19,7 @@ app.get('/', function (req, res) {
     for (let i = 1; i <= 16; i++) {
         pdfFiles.push(base + i + ".pdf");
     }
-    let pdfMerge = new PDFMerge(pdfFiles);
+    let pdfMerge = new PDFMerge(pdfFiles,"/app/bin/pdftk");
     pdfMerge
         .asBuffer()
         .merge(function (error, buffer) {
