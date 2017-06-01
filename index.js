@@ -36,7 +36,7 @@ app.get('/', async function (req, res) {
     let filepre =   today.getFullYear() + pad(today.getMonth()+1) + pad(today.getDate()) + '_';
     for (let i = 1; i <= 16; i++) {
         pdfFiles.push('./'+filepre + i + ".PDF");
-        await dp(base+filepre + i + ".PDF",filepre + i + ".PDF");
+        await download(base+filepre + i + ".PDF",filepre + i + ".PDF");
     }
     let pdfMerge = PDFMerge(pdfFiles,"newspaper.pdf",function (error) {
             if (error)
