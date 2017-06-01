@@ -41,12 +41,12 @@ app.get('/', async function (req, res) {
     let pdfMerge = PDFMerge(pdfFiles,"newspaper.pdf",function (error) {
             if (error)
                 res.end(error + "\n" + error.stack);
-            res.sendFile(_dirname + "newspaper.pdf");
+            res.sendFile(__dirname + "newspaper.pdf");
             res.end();
         });
 });
 app.get('/:filename/', async function (req, res) {
-    res.sendFile(_dirname+req.params.filename);
+    res.sendFile(__dirname+req.params.filename);
     res.end();
     
 });
