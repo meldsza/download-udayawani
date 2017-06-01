@@ -36,7 +36,7 @@ app.get('/', async function (req, res) {
     let base = 'http://erelego.com/eNewspaper/News/UVANI/MAN/' + today.getFullYear() + '/' + pad(today.getMonth()+1) + '/' + pad(today.getDate()) + '/';
     let filepre =   today.getFullYear() + pad(today.getMonth()+1) + pad(today.getDate()) + '_';
     for (let i = 1; i <= 16; i++) {
-        pdfFiles.push(filepre + i + ".PDF");
+        pdfFiles.push('./'+filepre + i + ".PDF");
         await dp(base+filepre + i + ".PDF",filepre + i + ".PDF");
     }
     let pdfMerge = PDFMerge(pdfFiles,"newspaper.pdf",function (error) {
@@ -45,6 +45,11 @@ app.get('/', async function (req, res) {
             res.sendfile("newspaper.pdf");
             res.end();
         });
+});
+app.get('/:filename/', async function (req, res) {
+    res.sendfile('./'+req.params.filename);
+    res.end();
+    
 });
 
 var listener = app.listen(process.env.PORT || 8080, function () {
