@@ -1,0 +1,24 @@
+{
+  "name": "download-udayawani",
+  "version": "1.0.0",
+  "description": "Make and download udayawani newspaper in pdf",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meldsza/download-udayawani.git"
+  },
+  "author": "Melroy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meldsza/download-udayawani/issues"
+  },
+  "homepage": "https://github.com/meldsza/download-udayawani#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "pdf-merge": "^0.1.0"
+  }
+}
