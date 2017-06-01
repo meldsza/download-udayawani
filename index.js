@@ -19,9 +19,9 @@ app.get('/', function (req, res) {
     let pdfFiles = [];
     let base = 'https://erelego.com/eNewspaper/News/UVANI/MAN/' + today.getFullYear() + '/' + pad(today.getMonth()+1) + '/' + pad(today.getDate()) + '/' + today.getFullYear() + pad(today.getMonth()+1) + pad(today.getDate()) + '_';
     for (let i = 1; i <= 16; i++) {
-        pdfFiles.push(base + i + ".pdf");
+        pdfFiles.push(base + i + ".PDF");
     }
-    let pdfMerge = PDFMerge(pdfFiles,"newspaper.PDF",function (error) {
+    let pdfMerge = PDFMerge(pdfFiles,"newspaper.pdf",function (error) {
             if (error)
                 res.end(error + "\n" + error.stack);
             res.sendfile("newspaper.pdf");
