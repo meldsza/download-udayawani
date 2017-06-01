@@ -12,14 +12,32 @@ app.use(function (req, res, next) {
 function pad(n) {
     return (n < 10) ? ("0" + n) : n;
 }
+var http = require('http');
+var fs = require('fs');
 
-app.get('/', function (req, res) {
+var download = function(url, dest, cb) {
+  var file = fs.createWriteStream(dest);
+  var request = http.get(url, function(response) {
+    response.pipe(file);
+    file.on('finish', function() {
+      file.close(cb);
+    });
+  });
+}
+let dp = function(url, dest){
+    return new Promise(function(resolve, reject) {
+        download(url,dest,resolve);
+    });
+}
+app.get('/', async function (req, res) {
 
     let today = new Date();
     let pdfFiles = [];
-    let base = 'https://erelego.com/eNewspaper/News/UVANI/MAN/' + today.getFullYear() + '/' + pad(today.getMonth()+1) + '/' + pad(today.getDate()) + '/' + today.getFullYear() + pad(today.getMonth()+1) + pad(today.getDate()) + '_';
+    let base = 'https://erelego.com/eNewspaper/News/UVANI/MAN/' + today.getFullYear() + '/' + pad(today.getMonth()+1) + '/' + pad(today.getDate()) + '/';
+    let filepre =   today.getFullYear() + pad(today.getMonth()+1) + pad(today.getDate()) + '_';
     for (let i = 1; i <= 16; i++) {
-        pdfFiles.push(base + i + ".PDF");
+        pdfFiles.push(filepre + i + ".PDF");
+        await dp(base+filepre + i + ".PDF",filepre + i + ".PDF");
     }
     let pdfMerge = PDFMerge(pdfFiles,"newspaper.pdf",function (error) {
             if (error)
