@@ -19,7 +19,7 @@ app.get('/', function (req, res) {
     for (let i = 1; i <= 16; i++) {
         pdfFiles.push(base + i + ".pdf");
     }
-    let pdfMerge = PDFMerge(pdfFiles,"newspaper.pdf",(function (error) {
+    let pdfMerge = PDFMerge(pdfFiles,"newspaper.pdf",function (error) {
             if (error)
                 res.end(error + "\n" + error.stack);
             res.sendfile("newspaper.pdf");
