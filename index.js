@@ -9,13 +9,15 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
+function pad(n) {
+    return (n < 10) ? ("0" + n) : n;
+}
 
 app.get('/', function (req, res) {
 
     let today = new Date();
     let pdfFiles = [];
-    let base = 'https://erelego.com/eNewspaper/News/UVANI/MAN/' + today.getFullYear() + '/' + today.getMonth() + '/' + today.getDate() + '/' + today.getFullYear() + today.getMonth() + today.getDate() + '_';
+    let base = 'https://erelego.com/eNewspaper/News/UVANI/MAN/' + today.getFullYear() + '/' + pad(today.getMonth()) + '/' + pad(today.getDate()) + '/' + today.getFullYear() + pad(today.getMonth()) + pad(today.getDate()) + '_';
     for (let i = 1; i <= 16; i++) {
         pdfFiles.push(base + i + ".pdf");
     }
