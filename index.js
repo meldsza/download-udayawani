@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 let app = express();
-let PDFMerge = require('pdf-merge');
+let PDFMerge = require('easy-pdf-merge');
 
 app.use(bodyParser.json())
 app.use(function (req, res, next) {
@@ -19,13 +19,11 @@ app.get('/', function (req, res) {
     for (let i = 1; i <= 16; i++) {
         pdfFiles.push(base + i + ".pdf");
     }
-    let pdfMerge = new PDFMerge(pdfFiles,"/app/vendor/pdftk/bin");
-    pdfMerge
-        .asBuffer()
-        .merge(function (error, buffer) {
+    let pdfMerge = PDFMerge(pdfFiles,"newspaper.pdf",(function (error) {
             if (error)
                 res.end(error + "\n" + error.stack);
-            res.end(buffer);
+            res.sendfile("newspaper.pdf");
+            res.end();
         });
 });
 
